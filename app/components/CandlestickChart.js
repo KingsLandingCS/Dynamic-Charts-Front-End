@@ -1,10 +1,11 @@
 "use client"; // This makes the component a Client Component
-
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 
+// import ApexCharts from 'apexcharts'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
+// Candlestick Chart
 const CandlestickChart = () => {
     const [options] = useState({
         chart: {
@@ -25,10 +26,12 @@ const CandlestickChart = () => {
         }
     });
 
+    // state management
     const [series, setSeries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // fetch data from backend
     useEffect(() => {
         const fetchData = async () => {
             try {
