@@ -1,8 +1,7 @@
 "use client"; // Mark the component as a Client Component
 
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -33,16 +32,29 @@ const BarChart = () => {
         }
     });
 
-    const [series] = useState([
-        {
-            name: 'Series 1',
-            data: [44, 55, 41, 67, 22, 43, 21, 49, 35, 58, 31, 63]
-        },
-        {
-            name: 'Series 2',
-            data: [13, 23, 20, 8, 13, 27, 33, 12, 41, 14, 18, 21]
-        }
-    ]);
+    const [series, setSeries] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/barchart-data');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setSeries(data.series);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error loading data: {error}</p>;
 
     return (
         <div>

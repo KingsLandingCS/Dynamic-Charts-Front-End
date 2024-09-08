@@ -1,8 +1,7 @@
 "use client"; // This makes the component a Client Component
 
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -26,32 +25,29 @@ const CandlestickChart = () => {
         }
     });
 
-    const [series] = useState([
-        {
-            data: [
-                {
-                    x: new Date('2024-09-01'),
-                    y: [6570, 6595, 6550, 6570]
-                },
-                {
-                    x: new Date('2024-09-02'),
-                    y: [6575, 6600, 6555, 6580]
-                },
-                {
-                    x: new Date('2024-09-03'),
-                    y: [6580, 6620, 6570, 6610]
-                },
-                {
-                    x: new Date('2024-09-04'),
-                    y: [6610, 6630, 6600, 6620]
-                },
-                {
-                    x: new Date('2024-09-05'),
-                    y: [6620, 6640, 6605, 6635]
-                }
-            ]
-        }
-    ]);
+    const [series, setSeries] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/candlestick-data');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setSeries(data.series);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error loading data: {error}</p>;
 
     return (
         <div>
