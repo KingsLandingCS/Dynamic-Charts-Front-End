@@ -2,7 +2,7 @@ import './globals.css'; // Import your global styles if you have any
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 export const metadata = {
-  title: 'Bootstrap in Next.js',
+  title: 'Dynamic Charts',
   description: 'Next.js app with Bootstrap',
 };
 

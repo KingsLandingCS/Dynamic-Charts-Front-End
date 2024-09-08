@@ -18,27 +18,24 @@ export default function Home() {
           </div>
 
           {/* Line Chart */}
-          <div className="col-md-4 ">
+          <div className="col-lg-6 ">
             <h1>Line Chart Example</h1>
             <LineChart />
           </div>
 
-          {/* Bar Chart  */}
-          <div className="col-md-4">
-            <h1>Bar Chart Example</h1>
-            <BarCharts />
-          </div>
-
           {/* Pie Chart  */}
-          <div className="col-md-4">
+          <div className="col-lg-6">
             <div><h1>Pie Chart Example</h1>
               <PieCharts />
             </div>
           </div>
 
-
+          {/* Bar Chart  */}
+          <div className="col-md-12">
+            <h1>Bar Chart Example</h1>
+            <BarCharts />
+          </div>
         </div>
-
       </main>
     </>
   );

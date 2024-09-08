@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chart Panel Workspace
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project consists of a Next.js frontend and an Express.js backend that together create a dynamic dashboard displaying various types of charts. The frontend uses ApexCharts to visualize data received from the backend API.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `chart-panel-workspace/`
+  - `chart-panel/` (Next.js frontend)
+  - `chart-backend/` (Express.js backend)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Frontend: Next.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+- Node.js (version 18 or higher recommended)
+- npm or yarn
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Navigate to the `chart-panel` directory:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   cd chart-panel
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+      npm install
+    # or
+    yarn install
+    
+3. **Create a .env.local file for environment variables (if needed):**
+
+    touch .env.local
+    Add any required environment variables for your setup.
+    
+4. **Start the Next.js development server:**
+
+    npm run dev
+    # or
+    yarn dev
+    
+    **The frontend will be available at http://localhost:3000.**
+    
+    
+#   Components
+    
+    BarChart.js: Displays a bar chart using data from the /api/barchart-data endpoint.
+    CandlestickChart.js: Displays a candlestick chart using data from the /api/candlestick-data endpoint.
+    LineChart.js: Displays a line chart using data from the /api/linechart-data endpoint.
+    PieChart.js: Displays a pie chart using data from the /api/piechart-data endpoint.
+    
+    
+   
+
+
+### Backend: Express.js
+
+1. **Prerequisites**
+
+    Node.js (version 18 or higher recommended)
+    npm or yarn
+    
+2. **Installation**
+
+    **Navigate to the chart-backend directory:**
+    
+    npm install
+    # or
+    yarn install
+    
+3. **Start the Express.js server:**
+
+    npm start
+    # or
+    yarn start
+
+    **The backend will be available at http://localhost:5000.**
+
+#    API Endpoints
+     
+    GET /api/barchart-data: Returns data for the bar chart.
+    GET /api/candlestick-data: Returns data for the candlestick chart.
+    GET /api/linechart-data: Returns data for the line chart.
+    GET /api/piechart-data: Returns data for the pie chart.
+
+##  CORS Configuration
+
+    CORS is enabled to allow requests from the Next.js frontend. Modify CORS settings as needed for your environment.
+
+### Development
+
+    Ensure both the frontend and backend servers are running concurrently.
+    Update frontend components to match changes in API data formats or requirements.
